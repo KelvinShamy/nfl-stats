@@ -1,8 +1,9 @@
 import React from 'react';
+import './App.scss';
 
 export default function App() {
   return (
-    <div>
+    <div className="font">
         <h1>App Test Component</h1>
         <div>Current Date:</div>
         <div>{ new Date().toDateString() }</div>
