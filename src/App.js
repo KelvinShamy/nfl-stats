@@ -1,12 +1,12 @@
 import React from 'react';
+import TeamDisplayContainer from './components/TeamDisplayContainer.jsx';
 import './App.scss';
 
 export default function App() {
   return (
     <div className="font">
-        <h1>App Test Component</h1>
-        <div>Current Date:</div>
-        <div>{ new Date().toDateString() }</div>
+        <h1>Compare NFL Teams</h1>
+        <TeamDisplayContainer />
     </div>
   )
 };
