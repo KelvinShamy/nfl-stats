@@ -5,7 +5,7 @@ import './App.scss';
 export default function App() {
   return (
     <div className="font">
-        <h1>Compare NFL Teams</h1>
+        <h1 className="column-items-center">Compare NFL Teams</h1>
         <TeamDisplayContainer />
     </div>
   )

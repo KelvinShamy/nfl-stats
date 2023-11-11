@@ -1,28 +1,53 @@
-import React from 'react';
-import staticData from '../constants/staticData';
+import React, { useState } from 'react';
 import TeamDisplay from './TeamDisplay.jsx';
 import DropDown from './DropDown.jsx';
+import staticData from '../constants/staticData';
 
 const { allData } = staticData;
-const teamNameArr = Object.keys(allData);
-// USE THIS ^^^ ALSO TO CREATE DROPDOWN MENUS
+const teamNamesArr = [];
 
-// console.log('teamNameArr', teamNameArr);
+for (let i = 0; i < 32; i++) {
+    teamNamesArr.push(Object.keys(allData)[i]);
+};
+
+teamNamesArr.sort();
 
 export default function TeamDisplayContainer() {
-  return (
-    <div>
-        <DropDown teams={teamNameArr} />
-        <div className="teams">
-            {teamNameArr.map((team, i) => {
-                if (i < teamNameArr.length -33) return (
-                    <TeamDisplay
-                        key={`${teamNameArr[i]}Display`}
-                        data={allData[teamNameArr[i]]}
+    const [ teamOne, setTeamOne ] = useState(null);
+    const [ teamTwo, setTeamTwo ] = useState(null);
+
+    const handleTeamOneChange = (team) => {
+        setTeamOne(team);
+    };
+
+    const handleTeamTwoChange = (team) => {
+        setTeamTwo(team);
+    };
+
+    return (
+        <div>
+            <div className="teams">
+                <div>
+                    <DropDown 
+                        teams={teamNamesArr}
+                        value={teamOne}
+                        handleChange={handleTeamOneChange}
                     />
-                )
-            })}
+                    {teamOne && <TeamDisplay
+                        data={allData[teamOne]}
+                    />}
+                </div>
+                <div>
+                    <DropDown 
+                        teams={teamNamesArr}
+                        value={teamTwo}
+                        handleChange={handleTeamTwoChange}
+                    />
+                    {teamTwo && <TeamDisplay
+                        data={allData[teamTwo]}
+                    />}
+                </div>
+            </div>
         </div>
-    </div>
-  )
+    )
 };

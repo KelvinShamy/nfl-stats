@@ -1,10 +1,14 @@
 import React from 'react'
 
-export default function DropDown({teams}) {
+export default function DropDown({teams, handleChange}) {
   return (
-    <select>
+    <select
+        className="font"
+        onChange={(e) => handleChange(e.target.value)}
+    >
+        <option value={null}>select</option>
         {teams.map((name) => {
-            return <option value={name} key={`${name}OptionKey`}>{name}</option>
+            return <option value={name} key={`${name}DropdownKey`}>{name}</option>
         })}
     </select>
   )
