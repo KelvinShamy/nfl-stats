@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TeamDisplay from './TeamDisplay.jsx';
 import DropDown from './DropDown.jsx';
 import staticData from '../constants/staticData';
+import divisionsMap from '../constants/divisionsMap.js';
 
 const { allData } = staticData;
 const teamNamesArr = [];
@@ -9,6 +10,8 @@ const teamNamesArr = [];
 for (let i = 0; i < 32; i++) {
     teamNamesArr.push(Object.keys(allData)[i]);
 };
+
+console.log('unsorted teams:', teamNamesArr);
 
 teamNamesArr.sort();
 
@@ -24,6 +27,15 @@ export default function TeamDisplayContainer() {
         setTeamTwo(team);
     };
 
+    const handleGetDivision = (team) => {
+        // USE REDUCE INSTEAD ?
+        let division = '';
+        Object.keys(divisionsMap).forEach((array) => {
+            if (divisionsMap[array].includes(team)) division = array.toString();
+        });
+        return division;
+    };
+
     return (
         <div>
             <div className="teams">
@@ -35,6 +47,7 @@ export default function TeamDisplayContainer() {
                     />
                     {teamOne && <TeamDisplay
                         data={allData[teamOne]}
+                        handleGetDivision={handleGetDivision}
                     />}
                 </div>
                 <div>
@@ -45,9 +58,10 @@ export default function TeamDisplayContainer() {
                     />
                     {teamTwo && <TeamDisplay
                         data={allData[teamTwo]}
+                        handleGetDivision={handleGetDivision}
                     />}
                 </div>
             </div>
         </div>
-    )
+    );
 };

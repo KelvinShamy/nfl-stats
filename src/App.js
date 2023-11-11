@@ -8,5 +8,5 @@ export default function App() {
         <h1 className="column-items-center">Compare NFL Teams</h1>
         <TeamDisplayContainer />
     </div>
-  )
+  );
 };
